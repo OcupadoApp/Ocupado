@@ -33,3 +33,22 @@ To run it, you must have Node.js installed on your system. `cd` into the directo
 
   [1]: http://cl.ly/image/3L072Q1W1K1z/Screen%20Shot%202013-12-29%20at%204.25.37%20PM.png
   [2]: http://cl.ly/image/0W0j200o1p3y/Screen%20Shot%202013-12-29%20at%204.25.59%20PM.png
+
+### Roadmap
+- Set up server push notifications (subscribe to Google Calendar
+   changes)
+  - Set up a server
+  - SSL certificate required
+  - Add Calendar proxy/caching service for app to pull from
+- Refactor code
+  - Marionette?
+- Improve test coverage
+- Update design (colours for Shopify version - https://github.com/richgilbank/Shopify-ocupado)
+- Clean up mobile version to improve speed, reduce glitchyness with
+  iScroll (some sloppy event binding in there)
+- Add list of events for the day to each room (limit to 1 room per board?)
+  - Update models to fetch all results from the day
+  - Update styles to ensure the event list works in portrait & landscape
+- Add room booking to the tablet version - just book the room
+  - Requires a login for the boards to create their own event on?
+
