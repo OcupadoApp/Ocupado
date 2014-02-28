@@ -16,29 +16,34 @@ window.toReadableTime = (t) ->
   else
     "00:00:00"
 
-Date.prototype.addHours = (h) ->
+Date::addHours = (h) ->
   @setHours @getHours() + h
   this
 
-Date.prototype.subtractHours = (h) ->
+Date::subtractHours = (h) ->
   @setHours @getHours() - h
   this
 
-Date.prototype.addMinutes = (m) ->
+Date::addMinutes = (m) ->
   @setMinutes @getMinutes + m
   this
 
-Date.prototype.subtractMinutes = (m) ->
+Date::subtractMinutes = (m) ->
   @setMinutes @getMinutes - m
   this
 
-Date.prototype.addMilliseconds = (s) ->
+Date::addMilliseconds = (s) ->
   @setMilliseconds @getMilliseconds() + s
   this
 
-Date.prototype.subtractMilliseconds = (s) ->
+Date::subtractMilliseconds = (s) ->
   @setMilliseconds @getMilliseconds() - s
   this
+
+Date::toHumanTime = ->
+  hours = if @getHours() > 12 then @getHours() - 12 else @getHours()
+  minutes = if @getMinutes() < 10 then "0#{@getMinutes()}" else @getMinutes()
+  "#{hours}:#{minutes}"
 
 window.RaphaelArc = (xloc, yloc, value, total, R) ->
   alpha = 360 / total * value

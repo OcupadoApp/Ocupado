@@ -10,6 +10,7 @@ class Ocupado.Views.ChromeView extends Backbone.View
     $.when(Ocupado.calendars.dfdCalendarsLoaded).then =>
       @$el.show()
       @$el.on 'click', '#calendarMenuBtn', @onMenuClick
+      @eventsList = new Ocupado.Views.EventsListView()
 
   render: ->
     @$el.html @template()

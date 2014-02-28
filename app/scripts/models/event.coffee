@@ -16,7 +16,15 @@ class Ocupado.Models.EventModel extends Backbone.RelationalModel
     @on 'event:start', @eventStart, this
     @on 'event:end', @eventEnd, this
 
+    @set 'attendeeList', @attendeesList()
     @set 'creatorImage', @creatorImagePath()
+    @set 'startTime', new Date(@get('startDate')).toHumanTime()
+    @set 'endTime', new Date(@get('endDate')).toHumanTime()
+    start = new Date(@get('startDate'))
+    if start.getDate() == new Date().getDate()
+      @set 'relativeDay', 'Today'
+    else if start.getDate() == new Date().getDate() + 1
+      @set 'relativeDay', 'Tomorrow'
 
     if @isOccurring()
       @trigger 'event:start'
@@ -56,4 +64,9 @@ class Ocupado.Models.EventModel extends Backbone.RelationalModel
 
   creatorImagePath: ->
     "http://www.gravatar.com/avatar/#{md5(@get('creatorEmail'))}?s=220"
+
+  attendeesList: ->
+    attendees = _.reject @get('attendees'), (a) =>
+      a.email == @get('room').get('calendarId')
+    _.pluck(attendees, 'displayName').join(', ')
 

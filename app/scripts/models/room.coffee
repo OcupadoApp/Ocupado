@@ -31,7 +31,7 @@ class Ocupado.Models.RoomModel extends Backbone.RelationalModel
     @
 
   fetch: (options) ->
-    maxTime     = (new Date()).addHours(3)
+    maxTime     = (new Date()).addHours(48)
     minTime     = new Date()
     request = gapi.client.calendar.events.list
       calendarId  : @get 'calendarId'
@@ -49,14 +49,14 @@ class Ocupado.Models.RoomModel extends Backbone.RelationalModel
     @set 'name', resp.summary unless @get('name').length
 
     if resp.items?.length > 0
-      @createEventModelFromEvent(resp.items[0])
-      if resp.items.length > 1
-        @createEventModelFromEvent(resp.items[1])
+      for k, v of resp.items
+        @createEventModelFromEvent(resp.items[k])
 
     @trigger 'update'
 
   createEventModelFromEvent: (event) ->
     new Ocupado.Models.EventModel
+      attendees: event.attendees
       startDate: Date.parse(event.start.dateTime)
       endDate: Date.parse(event.end.dateTime)
       creatorName: event.creator.displayName
