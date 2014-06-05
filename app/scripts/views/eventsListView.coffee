@@ -1,34 +1,20 @@
 'use strict';
 
-class Ocupado.Views.EventsListView extends Backbone.View
+class Ocupado.Views.EventsListView extends Backbone.Marionette.CompositeView
 
   el: '#eventsListContainer'
   template: Ocupado.Templates['app/scripts/templates/eventsList.hbs']
+  itemView: Ocupado.Views.EventItemView
+  itemViewContainer: 'ul.upcoming-events'
+
+  startingPositionX: 0
 
   events:
     'touchstart .events-list-handle': 'handleTouchStart'
     'touchmove .events-list-handle': 'handleTouchMove'
     'touchend .events-list-handle': 'handleTouchEnd'
 
-  initialize: ->
-    @render()
-    @startingPositionX = 0
-
-    @listenTo Ocupado.roomsView.collection, 'add', @render
-    @listenTo Ocupado.roomsView.collection, 'remove', @render
-
-    @listenTo Ocupado.roomsView.collection.models[0].get('events'), 'add', @render
-    @listenTo Ocupado.roomsView.collection.models[0].get('events'), 'remove', @render
-
-    @$el.on 'click', 'li', @openDetail
-
-  render: ->
-    if Ocupado.roomsView.collection.length != 1
-      @$el.html ''
-      return false
-    events = Ocupado.roomsView.collection.models[0].get('events').toJSON()
-    @$el.html @template
-      events: events
+  onRender: ->
     @eventsListEl = @$el.find '.events-list'
 
   handleTouchStart: (e) ->
@@ -57,7 +43,4 @@ class Ocupado.Views.EventsListView extends Backbone.View
     @eventsListEl.css
       '-webkit-transform': "translate3d(#{moveTo}, 0, 0)"
       'transform': "translate3d(#{moveTo}, 0, 0)"
-
-  openDetail: ->
-    $(@).toggleClass('open')
 
