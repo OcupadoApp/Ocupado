@@ -4,12 +4,13 @@ class Ocupado.Views.CalendarSelectionModalView extends Backbone.View
 
   template: Ocupado.Templates['app/scripts/templates/calendarSelectionModal.hbs']
 
+  events:
+    'change input[type="radio"]': 'onRadioChange'
+    'click .close-modal': 'close'
+
   initialize: ->
     @render()
     @animateModalEntering()
-
-    @$el.find('input[type="checkbox"]').on 'change', @onCheckboxChange
-    @$el.on 'click', '.close-modal', @close
 
   render: ->
     @$el.html @template({cals:Ocupado.calendars.toJSON()})
@@ -36,15 +37,10 @@ class Ocupado.Views.CalendarSelectionModalView extends Backbone.View
         @remove()
         @unbind()
 
-  onCheckboxChange: (e) =>
-    selectedArray = []
-    @$el.find('input[type="checkbox"]').each (ch) ->
-      if $(this).is(':checked')
-        selectedArray.push $(this).data('resourceid')
-        $(this).closest('label').removeClass 'inactive'
-      else
-        $(this).closest('label').addClass 'inactive'
-    Ocupado.calendars.setSelectedResources selectedArray
+  onRadioChange: (e) =>
+    resourceId = @$el.find('input[name="calendarId"]:checked').val()
+
+    Ocupado.calendars.setSelectedResources [resourceId]
     Ocupado.roomsView.collection.reset()
     Ocupado.roomsView.collection.setupModels()
 

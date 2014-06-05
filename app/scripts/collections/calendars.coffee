@@ -20,7 +20,7 @@ class Ocupado.Collections.CalendarCollection extends Backbone.Collection
     request = gapi.client.calendar.calendarList.list({})
     request.execute (calendars) =>
       filtered = _.filter calendars.items, (calendar) ->
-        /@(resource|group)\.calendar\.google\.com$/.test calendar.id
+        /@(resource)\.calendar\.google\.com$/.test calendar.id
       dfd.resolve(filtered)
     @dfdCalendarsLoaded.promise()
 
