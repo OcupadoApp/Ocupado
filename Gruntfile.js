@@ -13,20 +13,20 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
 
   // configurable paths
-  var yeomanConfig = {
+  var ocupadoConfig = {
     app: 'app',
     dist: 'dist/www'
   };
 
   grunt.initConfig({
-    yeoman: yeomanConfig,
+    ocupado: ocupadoConfig,
     watch: {
       options: {
         nospawn: true,
         livereload: true
       },
       coffee: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
+        files: ['<%= ocupado.app %>/scripts/{,*/}*.coffee'],
         tasks: ['coffee:dist']
       },
       livereload: {
@@ -34,18 +34,18 @@ module.exports = function (grunt) {
           livereload: LIVERELOAD_PORT
         },
         files: [
-          '<%= yeoman.app %>/*.html',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.styl',
-          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
-          '<%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs}',
+          '<%= ocupado.app %>/*.html',
+          '{.tmp,<%= ocupado.app %>}/styles/{,*/}*.css',
+          '{.tmp,<%= ocupado.app %>}/styles/{,*/}*.styl',
+          '{.tmp,<%= ocupado.app %>}/scripts/{,*/}*.js',
+          '<%= ocupado.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
+          '<%= ocupado.app %>/scripts/templates/*.{ejs,mustache,hbs}',
           'test/spec/**/*.js'
         ]
       },
       jst: {
         files: [
-          '<%= yeoman.app %>/scripts/templates/*.hbs'
+          '<%= ocupado.app %>/scripts/templates/*.hbs'
         ],
         tasks: ['handlebars']
       },
@@ -58,7 +58,7 @@ module.exports = function (grunt) {
       },
       stylus: {
         files: [
-          '<%= yeoman.app %>/styles/**/*.styl'
+          '<%= ocupado.app %>/styles/**/*.styl'
         ],
         tasks: ['stylus']
       }
@@ -75,7 +75,7 @@ module.exports = function (grunt) {
             return [
               lrSnippet,
               mountFolder(connect, '.tmp'),
-              mountFolder(connect, yeomanConfig.app)
+              mountFolder(connect, ocupadoConfig.app)
             ];
           }
         }
@@ -88,7 +88,7 @@ module.exports = function (grunt) {
               lrSnippet,
               mountFolder(connect, '.tmp'),
               mountFolder(connect, '.'),
-              mountFolder(connect, yeomanConfig.app)
+              mountFolder(connect, ocupadoConfig.app)
             ];
           }
         }
@@ -97,14 +97,14 @@ module.exports = function (grunt) {
         options: {
           middleware: function (connect) {
             return [
-              mountFolder(connect, yeomanConfig.dist)
+              mountFolder(connect, ocupadoConfig.dist)
             ];
           }
         }
       }
     },
     clean: {
-      dist: ['.tmp', '<%= yeoman.dist %>/*'],
+      dist: ['.tmp', '<%= ocupado.dist %>/*'],
       server: '.tmp'
     },
     jshint: {
@@ -114,8 +114,8 @@ module.exports = function (grunt) {
       },
       all: [
         'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/{,*/}*.js',
-        '!<%= yeoman.app %>/scripts/vendor/*',
+        '<%= ocupado.app %>/scripts/{,*/}*.js',
+        '!<%= ocupado.app %>/scripts/vendor/*',
         'test/spec/{,*/}*.js'
       ]
     },
@@ -133,7 +133,7 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/scripts',
+          cwd: '<%= ocupado.app %>/scripts',
           src: '{,*/}*.coffee',
           dest: '.tmp/scripts',
           ext: '.js'
@@ -160,26 +160,26 @@ module.exports = function (grunt) {
       compile: {
         options: {
           paths: [
-            '<%= yeoman.app %>/styles/includes',
-            '<%= yeoman.app %>/styles/rooms'
+            '<%= ocupado.app %>/styles/includes',
+            '<%= ocupado.app %>/styles/rooms'
           ]
         },
         files: {
-          '.tmp/styles/main.css': ['<%= yeoman.app %>/styles/main.styl']
+          '.tmp/styles/main.css': ['<%= ocupado.app %>/styles/main.styl']
         }
       }
     },
     useminPrepare: {
-      html: '<%= yeoman.app %>/index.html',
+      html: '<%= ocupado.app %>/index.html',
       options: {
-        dest: '<%= yeoman.dist %>'
+        dest: '<%= ocupado.dist %>'
       }
     },
     usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+      html: ['<%= ocupado.dist %>/{,*/}*.html'],
+      css: ['<%= ocupado.dist %>/styles/{,*/}*.css'],
       options: {
-        dirs: ['<%= yeoman.dist %>']
+        dirs: ['<%= ocupado.dist %>']
       }
     },
     uglify: {
@@ -189,9 +189,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>/scripts',
+          cwd: '<%= ocupado.dist %>/scripts',
           src: '**/*.js',
-          dest: '<%= yeoman.dist %>/scripts/'
+          dest: '<%= ocupado.dist %>/scripts/'
         }]
       },
       env: {
@@ -199,7 +199,7 @@ module.exports = function (grunt) {
           banner: "window._ENV='production';"
         },
         files: {
-          '<%= yeoman.dist %>/scripts/main.js': ['<%= yeoman.dist %>/scripts/main.js']
+          '<%= ocupado.dist %>/scripts/main.js': ['<%= ocupado.dist %>/scripts/main.js']
         }
       }
     },
@@ -207,9 +207,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= ocupado.app %>/images',
           src: '{,*/}*.{png,jpg,jpeg}',
-          dest: '<%= yeoman.dist %>/images'
+          dest: '<%= ocupado.dist %>/images'
         }]
       }
     },
@@ -217,7 +217,7 @@ module.exports = function (grunt) {
       dist: {
         options: {
           /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
+          // https://github.com/ocupado/grunt-usemin/issues/44
           //collapseWhitespace: true,
           collapseBooleanAttributes: true,
           removeAttributeQuotes: true,
@@ -228,9 +228,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>',
+          cwd: '<%= ocupado.app %>',
           src: '*.html',
-          dest: '<%= yeoman.dist %>'
+          dest: '<%= ocupado.dist %>'
         }]
       }
     },
@@ -239,8 +239,8 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
+          cwd: '<%= ocupado.app %>',
+          dest: '<%= ocupado.dist %>',
           src: [
             '*.{ico,txt}',
             '.htaccess',
@@ -248,7 +248,7 @@ module.exports = function (grunt) {
             'fonts/{,*/}*.*',
           ]
         },{
-          dest: '<%= yeoman.dist %>/config.xml',
+          dest: '<%= ocupado.dist %>/config.xml',
           src: ['dist/config.xml']
         }]
       }
@@ -279,9 +279,9 @@ module.exports = function (grunt) {
       dist: {
         files: {
           src: [
-            '<%= yeoman.dist %>/scripts/{,*/}*.js',
-            '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
+            '<%= ocupado.dist %>/scripts/{,*/}*.js',
+            '<%= ocupado.dist %>/styles/{,*/}*.css',
+            '<%= ocupado.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
             '/styles/fonts/{,*/}*.*',
           ]
         }
@@ -293,7 +293,7 @@ module.exports = function (grunt) {
         options: {
           stdout: true,
           execOptions: {
-            cwd: '<%= yeoman.dist %>'
+            cwd: '<%= ocupado.dist %>'
           }
         }
       },
@@ -302,7 +302,7 @@ module.exports = function (grunt) {
         options: {
           stdout: true,
           execOptions: {
-            cwd: '<%= yeoman.dist %>'
+            cwd: '<%= ocupado.dist %>'
           }
         }
       }
