@@ -5,6 +5,7 @@ class Ocupado.Routers.AppRouter extends Backbone.Router
     'app': 'app'
 
   calendarList: ->
+    Ocupado.chromeRegion.close()
     Ocupado.mainRegion.show new Ocupado.Views.CalendarListView
       collection: Ocupado.calendars
 

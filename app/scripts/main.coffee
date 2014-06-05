@@ -25,9 +25,11 @@ window.Ocupado = _.extend (new Backbone.Marionette.Application()),
     Ocupado.router = new Ocupado.Routers.AppRouter()
     Backbone.history.start()
     if Ocupado.calendars.getSelectedResources().length
-      Ocupado.router.navigate 'app'
+      Ocupado.router.navigate 'app',
+        trigger: true
     else
-      Ocupado.router.navigate 'calendar_list'
+      Ocupado.router.navigate 'calendar_list',
+        trigger: true
 
 , Backbone.Events
 

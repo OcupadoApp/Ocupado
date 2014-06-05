@@ -1,8 +1,8 @@
-'use strict';
-
 class Ocupado.Views.ChromeView extends Backbone.View
 
   template: Ocupado.Templates['app/scripts/templates/chrome.hbs']
+  events:
+    'click #calendarSelectionBtn': 'navigateToCalendarList'
 
   initialize: ->
     @render()
@@ -24,4 +24,8 @@ class Ocupado.Views.ChromeView extends Backbone.View
       @$el.append @modal.el
     else
       @modal.close()
+
+  navigateToCalendarList: ->
+    Ocupado.router.navigate 'calendar_list',
+      trigger: true
 
