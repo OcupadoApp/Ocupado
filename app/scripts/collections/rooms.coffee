@@ -15,9 +15,9 @@ class Ocupado.Collections.RoomsCollection extends Backbone.Collection
       @setupModels()
 
   setupModels: ->
-    _.each Ocupado.calendars.getSelectedCalendars().sort(), (calendar) =>
-      @add
-        calendarId: calendar.get('resourceId')
+    @reset
+      calendarId: Ocupado.calendars.getSelectedCalendars()[0].get('resourceId')
+    @fetchAll()
 
   fetchAll: ->
     @trigger 'fetchAll'

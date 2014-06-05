@@ -5,15 +5,16 @@ class Ocupado.Routers.AppRouter extends Backbone.Router
     'app': 'app'
 
   calendarList: ->
-    Ocupado.chromeRegion.close()
+    Ocupado.chromeView.$el.addClass('clickThrough').hide() if Ocupado.chromeView?
     Ocupado.mainRegion.show new Ocupado.Views.CalendarListView
       collection: Ocupado.calendars
 
   app: ->
-    Ocupado.roomsView = new Ocupado.Views.RoomsView
-      collection: new Ocupado.Collections.RoomsCollection
+    unless Ocupado.roomsView?
+      Ocupado.roomsView = new Ocupado.Views.RoomsView
+        collection: new Ocupado.Collections.RoomsCollection
     Ocupado.mainRegion.show Ocupado.roomsView
 
-    Ocupado.chromeView = new Ocupado.Views.ChromeView()
-    Ocupado.chromeRegion.show Ocupado.chromeView
+    Ocupado.chromeView = new Ocupado.Views.ChromeView() unless Ocupado.chromeView?
+    Ocupado.chromeView.$el.removeClass('clickThrough').show()
 

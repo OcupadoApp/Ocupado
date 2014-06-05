@@ -1,6 +1,6 @@
 'use strict';
 
-class Ocupado.Views.RoomView extends Backbone.View
+class Ocupado.Views.RoomView extends Backbone.Marionette.ItemView
 
   template: Ocupado.Templates['app/scripts/templates/room.hbs']
 
