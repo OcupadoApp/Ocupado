@@ -2,7 +2,6 @@
 
 class Ocupado.Views.ChromeView extends Backbone.View
 
-  el: '#OcupadoChrome'
   template: Ocupado.Templates['app/scripts/templates/chrome.hbs']
 
   initialize: ->

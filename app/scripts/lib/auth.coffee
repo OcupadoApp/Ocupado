@@ -1,5 +1,6 @@
 window.clientLoaded = $.Deferred()
 window.calendarApiLoaded = $.Deferred()
+window.authCompleted = $.Deferred()
 
 window.handleClientLoad = ->
   clientLoaded.resolve()
@@ -92,11 +93,10 @@ window.Ocupado.Auth =
     if authResult and not authResult.error
       #Success
       $(authBtn).hide()
-      Ocupado.trigger 'ocupado:auth:success'
+      authCompleted.resolve()
       gapi.client.load 'calendar', 'v3', Ocupado.Auth.calendarLoaded
     else
       $(authBtn).show().click Ocupado.Auth.handleAuthClick
-      Ocupado.trigger 'ocupado:auth:failure'
 
   handleAuthClick: ->
     gapi.auth.authorize

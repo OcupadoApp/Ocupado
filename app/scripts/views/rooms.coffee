@@ -2,8 +2,8 @@
 
 class Ocupado.Views.RoomsView extends Backbone.View
 
-  el: '#OcupadoApp'
   template: Ocupado.Templates['app/scripts/templates/rooms.hbs']
+  className: 'rooms-container'
 
   initialize: ->
     @listenTo @collection, 'add', @addRoom

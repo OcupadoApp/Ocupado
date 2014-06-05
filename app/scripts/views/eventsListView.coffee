@@ -1,5 +1,3 @@
-'use strict';
-
 class Ocupado.Views.EventsListView extends Backbone.Marionette.CompositeView
 
   el: '#eventsListContainer'
