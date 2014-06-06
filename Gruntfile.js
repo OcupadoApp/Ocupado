@@ -365,7 +365,7 @@ module.exports = function (grunt) {
       'copy',
       'rev',
       'usemin',
-      target ? 'shell:' + target : 'shell:android'
+      target ? 'shell:' + target : 'shell:ios'
     ]);
   });
 

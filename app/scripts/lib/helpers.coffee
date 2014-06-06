@@ -25,11 +25,11 @@ Date::subtractHours = (h) ->
   this
 
 Date::addMinutes = (m) ->
-  @setMinutes @getMinutes + m
+  @setMinutes @getMinutes() + m
   this
 
 Date::subtractMinutes = (m) ->
-  @setMinutes @getMinutes - m
+  @setMinutes @getMinutes() - m
   this
 
 Date::addMilliseconds = (s) ->

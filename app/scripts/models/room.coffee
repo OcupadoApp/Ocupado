@@ -76,6 +76,11 @@ class Ocupado.Models.RoomModel extends Backbone.RelationalModel
     return true unless @hasEvents()
     @get('events').isVacant() and !@isOccupied() and !@isUpcoming()
 
+  status: ->
+    'occupied' if @isOccupied()
+    'upcoming' if @isUpcoming()
+    'vacant' if @isVacant()
+
   hasEvents: ->
     !!@get('events').length
 
@@ -85,4 +90,26 @@ class Ocupado.Models.RoomModel extends Backbone.RelationalModel
       ((Date.now() - e.get('startDate')) / (e.get('endDate') - e.get('startDate'))) * 100
     else
       100
+
+  bookRoom: (opts) ->
+    resource =
+      summary: opts.summary
+      location: "Room: #{@get('name')}"
+      start:
+        dateTime: (new Date()).toISOString()
+      end:
+        dateTime: (new Date()).addMilliseconds(opts.duration).toISOString()
+      attendees: [
+        email: @get('calendarId')
+      ]
+    @saveEvent(resource)
+
+  saveEvent: (resource) ->
+    request = gapi.client.calendar.events.insert
+      calendarId: 'primary'
+      resource: resource
+    request.execute @onEventInsertion
+
+  onEventInsertion: =>
+    @fetch()
 

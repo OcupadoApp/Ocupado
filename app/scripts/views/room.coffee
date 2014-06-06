@@ -1,9 +1,6 @@
-'use strict';
-
 class Ocupado.Views.RoomView extends Backbone.Marionette.ItemView
 
   template: Ocupado.Templates['app/scripts/templates/room.hbs']
-
   tagName: 'section'
 
   initialize: ->
@@ -14,11 +11,21 @@ class Ocupado.Views.RoomView extends Backbone.Marionette.ItemView
       model: @model
 
     setInterval =>
-      @render()
+      if @model.status() != @previousStatus
+        @render()
+      else
+        @partialRender()
+      @previousStatus = @model.status()
     , 1000
 
   attributes: ->
     class: if @model.isOccupied() then 'occupied' else if @model.isUpcoming() then 'upcoming' else 'vacant'
+
+  partialRender: ->
+    @$el.find('.time-remaining').text(@timeRemaining()) unless @model.isVacant()
+    @resizeContainers()
+    @roomArcView.clearPolarClock() if @roomArcView?
+    @roomArcView.render()
 
   render: ->
     @roomArcView.clearPolarClock() if @roomArcView?
