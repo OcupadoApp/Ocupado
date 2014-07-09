@@ -165,7 +165,7 @@ module.exports = function (grunt) {
           ]
         },
         files: {
-          '.tmp/styles/main.css': ['<%= ocupado.app %>/styles/main.styl']
+          '<%= ocupado.app %>/styles/main.css': ['<%= ocupado.app %>/styles/main.styl']
         }
       }
     },

@@ -1,5 +1,4 @@
 window.deviceReady = $.Deferred()
-
 document.addEventListener 'deviceready', ->
   deviceReady.resolve()
 
@@ -35,7 +34,6 @@ window.Ocupado = _.extend (new Backbone.Marionette.Application()),
 
 Ocupado.addRegions
   mainRegion: '#OcupadoApp'
-  # chromeRegion: '#OcupadoChrome'
 
 if Ocupado.env is 'production'
   $ -> $.when(clientLoaded.promise(), deviceReady.promise(), calendarApiLoaded.promise(), authCompleted.promise()).then(Ocupado.init)
