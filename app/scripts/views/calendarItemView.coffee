@@ -14,7 +14,6 @@ class Ocupado.Views.CalendarItemView extends Backbone.Marionette.ItemView
   onRoomSelection: (e) ->
     e.preventDefault()
     Ocupado.calendars.setSelectedResources [@$el.find('a').data('id')]
-    Ocupado.roomsView.collection.setupModels()
     Ocupado.router.navigate 'app',
       trigger: true
 

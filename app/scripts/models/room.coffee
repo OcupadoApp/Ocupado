@@ -111,5 +111,7 @@ class Ocupado.Models.RoomModel extends Backbone.RelationalModel
     request.execute @onEventInsertion
 
   onEventInsertion: =>
-    @fetch()
+    setTimeout =>
+      @fetch()
+    , 500
 

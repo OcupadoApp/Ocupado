@@ -75,7 +75,7 @@ window.Ocupado.Auth =
     deferred.promise()
 
   checkAuth: ->
-    if Ocupado.env is 'production'
+    if Ocupado.env == 'production'
       localStorage.access_token? && localStorage.refresh_token?
     else
       gapi.auth.authorize
@@ -86,6 +86,7 @@ window.Ocupado.Auth =
 
   calendarLoaded: ->
     calendarApiLoaded.resolve()
+    authCompleted.resolve()
     Ocupado.trigger 'ocupado:auth:calendarloaded'
 
   handleAuthResult: (authResult) ->
