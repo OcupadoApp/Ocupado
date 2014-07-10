@@ -1,19 +1,12 @@
 class Ocupado.Views.CalendarItemView extends Backbone.Marionette.ItemView
 
   tagName: 'li'
-  isEmpty: false
+  template: Ocupado.Templates['app/scripts/templates/calendarItem.hbs']
   events:
-    'click a': 'onRoomSelection'
+    'click': 'onRoomSelection'
 
-  getTemplate: ->
-    if @isEmpty || @options.isEmpty
-      Ocupado.Templates['app/scripts/templates/calendarEmpty.hbs']
-    else
-      Ocupado.Templates['app/scripts/templates/calendarItem.hbs']
-
-  onRoomSelection: (e) ->
+  onRoomSelection: (e) =>
     e.preventDefault()
-    Ocupado.calendars.setSelectedResources [@$el.find('a').data('id')]
+    Ocupado.calendars.setSelectedResources [@model.get('resourceId')]
     Ocupado.router.navigate 'app',
       trigger: true
-
