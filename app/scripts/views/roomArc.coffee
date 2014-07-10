@@ -4,7 +4,7 @@ class Ocupado.Views.RoomArcView extends Backbone.View
 
   initialize: ->
     @parentView = @options.parentView
-    @strokeWidth = 15
+    @strokeWidth = 1
 
   initializeRaphael: ->
     @el = @parentView.$el.find('.polar-clock').get(0)
@@ -20,7 +20,7 @@ class Ocupado.Views.RoomArcView extends Backbone.View
       )
       @paper.customAttributes.arc = RaphaelArc
 
-      bgColor = "#7e9c3d" if @model.isVacant()
+      bgColor = "#0a3d33" if @model.isVacant()
       bgColor = "#d5b430" if @model.isUpcoming()
       bgColor = "#a03a3a" if @model.isOccupied()
 

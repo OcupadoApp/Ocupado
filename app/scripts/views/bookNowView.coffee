@@ -27,7 +27,7 @@ class Ocupado.Views.BookNowView extends Backbone.Marionette.ItemView
       arcY = arc.$el.offset().top + arc.arcPosY
       arcX = arc.$el.offset().left + arc.arcPosX
       theta = Math.atan2(@touchPosY - arcY, @touchPosX - arcX)
-      @newY = Math.sin(theta) * arc.maxRadius
+      @newY = Math.sin(theta) * arc.maxRadius - 8
       @newX = Math.cos(theta) * arc.maxRadius
       @updateDurationIndicator(theta)
       @btn.css
@@ -49,6 +49,7 @@ class Ocupado.Views.BookNowView extends Backbone.Marionette.ItemView
 
   handleTouchEnd: (e) ->
     unless $.inArray e.timeStamp, @eventBuffer
+      console.log 'booking'
       Ocupado.roomsView.collection.models[0].bookRoom
         duration: @newEventDuration
         summary: "Room booked by Ocupado"

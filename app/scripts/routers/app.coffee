@@ -9,7 +9,9 @@ class Ocupado.Routers.AppRouter extends Backbone.Router
       collection: Ocupado.calendars
 
   app: ->
-    unless Ocupado.roomsView?
+    if Ocupado.roomsView?
+      Ocupado.roomsView.collection.setupModels()
+    else
       Ocupado.roomsView = new Ocupado.Views.RoomsView
         collection: new Ocupado.Collections.RoomsCollection
     Ocupado.mainRegion.show Ocupado.roomsView

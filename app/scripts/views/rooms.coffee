@@ -5,7 +5,7 @@ class Ocupado.Views.RoomsView extends Backbone.Marionette.CompositeView
   itemView: Ocupado.Views.RoomView
   itemViewContainer: '.room-container'
   events:
-    'click button.back': 'navigateToCalendarList'
+    'click .room-name': 'navigateToCalendarList'
 
   initialize: ->
     Handlebars.registerPartial('occupied', Ocupado.Templates.occupied)
