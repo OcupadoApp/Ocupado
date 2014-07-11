@@ -1,50 +1,46 @@
 'use strict';
 
+ARC_DATA =
+  vacant:
+    bgStroke: 1
+    arcStroke: 1
+    bgColor: '#0a3d33'
+  upcoming:
+    bgStrokeWidth: 1
+    arcStrokeWidth: 1
+    bgColor: '#96bf48'
+  occupied:
+    bgStrokeWidth: 1
+    arcStrokeWidth: 5
+    bgColor: '#cccccc'
+    arcColor: '#0f8e8e'
+
 class Ocupado.Views.RoomArcView extends Backbone.View
 
-  initialize: ->
-    @parentView = @options.parentView
-    @strokeWidth = 1
-
-  initializeRaphael: ->
-    @el = @parentView.$el.find('.polar-clock').get(0)
+  setup: ->
+    @el = @options.parentView.$el.find('.polar-clock').get(0)
     @$el = $(@el)
-    if @$el?
-      @maxRadius = _.min([@$el.width(), @$el.height()])/2 - 10
-      @arcPosX = @$el.width()/2
-      @arcPosY = @maxRadius + 8
-      @paper = Raphael(
-        @el,
-        @$el.width(),
-        @$el.height()
-      )
-      @paper.customAttributes.arc = RaphaelArc
 
-      bgColor = "#0a3d33" if @model.isVacant()
-      bgColor = "#d5b430" if @model.isUpcoming()
-      bgColor = "#a03a3a" if @model.isOccupied()
+    @maxRadius = _.min([@$el.width(), @$el.height()]) / 2 - 10
+    @arcPosX = @$el.width() / 2
+    @arcPosY = @maxRadius + 8
 
-      @bgarc = @paper.path().attr
-        "stroke": bgColor
-        "stroke-width": @strokeWidth
-        arc: [@arcPosX, @arcPosY, 100, 100, @maxRadius]
+    @paper = Raphael(@el, @$el.width(), @$el.height())
+    @paper.customAttributes.arc = RaphaelArc
 
-      @arc = @paper.path().attr
-        "stroke": "#fff"
-        "stroke-width": @strokeWidth
-        arc: [@arcPosX, @arcPosY, 0, 100, @maxRadius]
+    # Background circle
+    status = @model.status()
+    @bgarc = @paper.path().attr
+      "stroke": ARC_DATA[status].bgColor
+      "stroke-width": ARC_DATA[status].bgStrokeWidth
+      arc: [@arcPosX, @arcPosY, 100, 100, @maxRadius]
 
-  render: ->
-    unless @paper?
-      @initializeRaphael()
+    @arc = @paper.path().attr
+      "stroke": ARC_DATA[status].arcColor
+      "stroke-width": ARC_DATA[status].arcStrokeWidth
+      arc: [@arcPosX, @arcPosY, 0, 100, @maxRadius]
 
-    if @paper? and @model.isOccupied()
-      @arc.attr
-        arc: [@arcPosX, @arcPosY, @model.percentComplete(), 100, @maxRadius]
-
-  clearPolarClock: ->
-    if @paper?
-      @paper.clear()
-      @paper.remove()
-      @paper = null
-
+  update: ->
+    @arc.animate
+      arc: [@arcPosX, @arcPosY, @model.percentComplete(), 100, @maxRadius]
+    , 1000, 'linear'

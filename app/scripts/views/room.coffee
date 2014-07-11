@@ -23,17 +23,13 @@ class Ocupado.Views.RoomView extends Backbone.Marionette.ItemView
 
   partialRender: ->
     @$el.find('.time-remaining').text(@timeRemaining()) unless @model.isVacant()
-    @resizeContainers()
-    @roomArcView.clearPolarClock() if @roomArcView?
-    @roomArcView.render()
+    @roomArcView.update()
 
   render: ->
-    @roomArcView.clearPolarClock() if @roomArcView?
     @$el.html @template(@templateData())
     @$el.attr _.extend({}, _.result(this, 'attributes'))
 
-    @resizeContainers()
-    @roomArcView.render() if @roomArcView?
+    @roomArcView.setup() if @roomArcView?
     @
 
   templateData: ->
@@ -50,10 +46,4 @@ class Ocupado.Views.RoomView extends Backbone.Marionette.ItemView
       toReadableTime(remaining)
     else
       '00:00:00'
-
-  resizeContainers: ->
-    st = @$el.find('.room-status-text')
-    p = st.siblings('.polar-clock')
-    center = Math.min(p.width(), p.height())/2 - st.height()/2
-    @$el.find('.room-status-text').css('top', "#{center}px")
 

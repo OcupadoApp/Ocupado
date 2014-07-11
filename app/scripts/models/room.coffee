@@ -3,7 +3,6 @@
 class Ocupado.Models.RoomModel extends Backbone.RelationalModel
 
   defaults:
-    state: 'vacant'
     current: false
     upcoming: false
     calendarId: false
@@ -77,9 +76,9 @@ class Ocupado.Models.RoomModel extends Backbone.RelationalModel
     @get('events').isVacant() and !@isOccupied() and !@isUpcoming()
 
   status: ->
-    'occupied' if @isOccupied()
-    'upcoming' if @isUpcoming()
-    'vacant' if @isVacant()
+    return 'occupied' if @isOccupied()
+    return 'upcoming' if @isUpcoming()
+    return 'vacant' if @isVacant()
 
   hasEvents: ->
     !!@get('events').length
