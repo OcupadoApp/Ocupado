@@ -38,7 +38,7 @@ module.exports = function (grunt) {
           '{.tmp,<%= ocupado.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= ocupado.app %>}/styles/{,*/}*.styl',
           '{.tmp,<%= ocupado.app %>}/scripts/{,*/}*.js',
-          '<%= ocupado.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
+          '<%= ocupado.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= ocupado.app %>/scripts/templates/*.{ejs,mustache,hbs}',
           'test/spec/**/*.js'
         ]
@@ -203,16 +203,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= ocupado.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg}',
-          dest: '<%= ocupado.dist %>/images'
-        }]
-      }
-    },
     htmlmin: {
       dist: {
         options: {
@@ -243,9 +233,8 @@ module.exports = function (grunt) {
           dest: '<%= ocupado.dist %>',
           src: [
             '*.{ico,txt}',
-            '.htaccess',
-            'images/{,*/}*.{webp,gif}',
-            'fonts/{,*/}*.*',
+            'images/{,*/}*.*',
+            'fonts/{,*/}*.*'
           ]
         },{
           dest: '<%= ocupado.dist %>/config.xml',
@@ -280,9 +269,7 @@ module.exports = function (grunt) {
         files: {
           src: [
             '<%= ocupado.dist %>/scripts/{,*/}*.js',
-            '<%= ocupado.dist %>/styles/{,*/}*.css',
-            '<%= ocupado.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
-            '/styles/fonts/{,*/}*.*',
+            '<%= ocupado.dist %>/styles/{,*/}*.css'
           ]
         }
       }
@@ -356,7 +343,6 @@ module.exports = function (grunt) {
       'coffee',
       'handlebars',
       'useminPrepare',
-      'imagemin',
       'htmlmin',
       'concat',
       'stylus:compile',
