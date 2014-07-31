@@ -20,12 +20,12 @@
 .icon-arrow-right{font-family:entypo;font-size:30px;display:inline-block;color:#585858;transform:scale(2,1);-webkit-transform:scale(1,2)}
 @font-face{font-family:'bebas';src:url("../fonts/BebasNeue-webfont.eot");src:url("../fonts/BebasNeue-webfont.eot?#iefix") format('embedded-opentype'),url("../fonts/BebasNeue-webfont.woff") format('woff'),url("../fonts/BebasNeue-webfont.ttf") format('truetype'),url("../fonts/BebasNeue-webfont.svg#bebas_neueregular") format('svg');font-weight:normal;font-style:normal}
 .back{margin-top:50px;border:1px solid #fff;border-radius:3px;background:transparent;position:absolute;color:#fff}
-.book-now-btn{position:absolute;width:50px;height:50px;left:50%;margin-left:-25px;top:50%;margin-top:-15px;border:1px solid #57616c;border-radius:50%;}
-.book-now-btn:before{content:'+';font-family:'bebas';display:block;font-size:60px;width:100%;text-align:center;line-height:46px}
+.book-now-btn{position:absolute;width:50px;height:50px;left:50%;margin-left:-25px;top:50%;margin-top:-25px;border:1px solid #57616c;border-radius:50%;background:#0d7f7f;}
+.book-now-btn:before{content:'';display:block;width:100%;height:100%;background-image:url("../images/icon-plus.svg");background-size:15px;background-position:center center;background-repeat:no-repeat}
 .events-list{position:absolute;height:80%;width:40%;right:-40%;top:10%;border:3px solid #0d7f7f;border-radius:5px 0 0 5px;box-sizing:border-box;padding:4px;color:#000;z-index:20;}
-.events-list .events-list-content{height:100%;width:100%;border:1px solid #ddd}
+.events-list .events-list-content{height:100%;width:100%}
 .events-list .events-list-handle{width:30px;height:100%;position:absolute;left:-30px;top:0;margin-top:-25px;}
-.events-list .events-list-handle:before{content:'';font-family:entypo;color:#0d7f7f;display:block;height:50px;width:30px;position:absolute;left:0;top:50%;margin-top:-25px;transform:scale(2,1);-webkit-transform:scale(1,2);line-height:50px;font-size:40px}
+.events-list .events-list-handle:before{content:'';font-family:entypo;color:#fff;display:block;height:50px;width:30px;position:absolute;left:0;top:50%;margin-top:-25px;transform:scale(2,1);-webkit-transform:scale(1,2);line-height:50px;font-size:40px}
 .upcoming-events{margin:0;padding:0;width:100%;height:100%;overflow:auto;overflow-y:scroll;-webkit-overflow-scrolling:touch;}
 .upcoming-events li{display:block;margin:0;background:#f3f3f3;padding:10px 10px 10px 70px;border-bottom:1px solid #ddd;position:relative;}
 .upcoming-events li img{border-radius:0;width:58px;height:58px;left:0;top:0;margin:0}
@@ -52,12 +52,11 @@ img{width:110px;height:110px;border-radius:50%;position:absolute;z-index:10;left
 #OcupadoApp .room-container{display:-webkit-box;display:-webkit-flex;display:flex;height:100%;-webkit-box-pack:justify;align-items:stretch;overflow:hidden;position:absolute;width:100%;height:100%}
 #OcupadoApp section{width:0;box-flex:1;-webkit-box-flex:1;-webkit-flex:1;flex:1;position:relative;border-left:1px solid #000;}
 #OcupadoApp section:first-child{border-left:none}
-.occupied{background:#ffba00;background:-webkit-gradient(linear,left top,left bottom,color-stop(20%,#ffba00),color-stop(80%,#f46030));background:linear-gradient(to bottom,#ffba00 20%,#f46030 80%);color:#0a6060;}
+.occupied{background:#ffba00;background:-webkit-gradient(linear,left top,left bottom,color-stop(20%,#ffba00),color-stop(80%,#f46030));background:linear-gradient(to bottom,#ffba00 20%,#f46030 80%);color:#fff;}
 .occupied .creator-name{font-size:18px;text-align:center;font-weight:400}
 .occupied .room-status-text{color:#fff}
-.upcoming{background:#286f6f;background:-webkit-gradient(linear,left top,left bottom,color-stop(20%,#286f6f),color-stop(80%,#1b4c4b));background:linear-gradient(to bottom,#286f6f 20%,#1b4c4b 80%);color:#fca700;}
+.upcoming{background:#286f6f;background:-webkit-gradient(linear,left top,left bottom,color-stop(20%,#286f6f),color-stop(80%,#1b4c4b));background:linear-gradient(to bottom,#286f6f 20%,#1b4c4b 80%);color:#fff;}
 .upcoming .up-next{text-align:center;font-size:18px}
-.upcoming .room-status-text{color:#96bf48}
 .vacant{background:#79ffb2;background:-webkit-gradient(linear,left top,left bottom,color-stop(20%,#79ffb2),color-stop(80%,#9ee7d8));background:linear-gradient(to bottom,#79ffb2 20%,#9ee7d8 80%);}
 #authorizeButton{background:#3d3d3d;color:#d5b430;border:none;border-radius:5px;padding:10px 20px;position:absolute;top:50%;margin-top:-35px;left:50%;margin-left:-105px;font-size:42px;font-family:'Raleway';font-weight:100}
 .clickThrough{pointer-events:none}

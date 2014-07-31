@@ -48,10 +48,10 @@ class Ocupado.Views.BookNowView extends Backbone.Marionette.ItemView
     degs
 
   handleTouchEnd: (e) ->
-    unless $.inArray(e.timeStamp, @eventBuffer) || !@newEventDuration?
-      Ocupado.roomsView.collection.models[0].bookRoom
-        duration: @newEventDuration
-        summary: "Room booked by Ocupado"
+    # unless $.inArray(e.timeStamp, @eventBuffer) || !@newEventDuration?
+    #   Ocupado.roomsView.collection.models[0].bookRoom
+    #     duration: @newEventDuration
+    #     summary: "Room booked by Ocupado"
 
     @btn.css
       'webkitTransform': "translate3d(0px, 0px, 0)"

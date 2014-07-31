@@ -2,38 +2,43 @@
 
 ARC_DATA =
   vacant:
-    bgStroke: 1
-    arcStroke: 1
-    bgColor: '#0a3d33'
-  upcoming:
-    bgStrokeWidth: 1
     arcStrokeWidth: 1
-    bgColor: '#96bf48'
+    bgColor: '#0a3d33'
+    arcColor: '#0d7f7f'
+  upcoming:
+    arcStrokeWidth: 1
+    bgColor: '#ffffff'
   occupied:
-    bgStrokeWidth: 1
-    arcStrokeWidth: 5
-    bgColor: '#cccccc'
-    arcColor: '#0f8e8e'
+    arcStrokeWidth: 3
+    bgColor: '#ffffff'
+    arcColor: '#ffffff'
 
 class Ocupado.Views.RoomArcView extends Backbone.View
 
+  initialize: ->
+    Ocupado.roomArcView = @
+
   setup: ->
+    status = @model.status()
     @el = @options.parentView.$el.find('.polar-clock').get(0)
     @$el = $(@el)
 
-    @maxRadius = _.min([@$el.width(), @$el.height()]) / 2 - 10
+    maxWidth = Math.max.call(null, ARC_DATA[status].arcStrokeWidth)
+    @maxRadius = _.min([@$el.width(), @$el.height()]) / 2 - maxWidth
+
     @arcPosX = @$el.width() / 2
-    @arcPosY = @maxRadius + 8
+    @arcPosY = @maxRadius + maxWidth
 
     @paper = Raphael(@el, @$el.width(), @$el.height())
     @paper.customAttributes.arc = RaphaelArc
 
-    # Background circle
-    status = @model.status()
+    # Background circle (dots)
     @bgarc = @paper.path().attr
       "stroke": ARC_DATA[status].bgColor
-      "stroke-width": ARC_DATA[status].bgStrokeWidth
+      "stroke-width": 2
+      "stroke-dasharray": '. '
       arc: [@arcPosX, @arcPosY, 100, 100, @maxRadius]
+    $(@bgarc.node).attr('stroke-dasharray', "1, 16")
 
     @arc = @paper.path().attr
       "stroke": ARC_DATA[status].arcColor

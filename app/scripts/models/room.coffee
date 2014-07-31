@@ -88,7 +88,7 @@ class Ocupado.Models.RoomModel extends Backbone.RelationalModel
       e = @get('events').sort().first()
       ((Date.now() - e.get('startDate')) / (e.get('endDate') - e.get('startDate'))) * 100
     else
-      100
+      0
 
   bookRoom: (opts) ->
     resource =
