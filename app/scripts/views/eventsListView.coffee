@@ -14,6 +14,7 @@ class Ocupado.Views.EventsListView extends Backbone.Marionette.CompositeView
 
   onRender: ->
     @eventsListEl = @$el.find '.events-list'
+    @eventsListHandle = @eventsListEl.find('.events-list-handle')
 
   handleTouchStart: (e) ->
     @touchStartX = e.originalEvent.targetTouches[0].pageX
@@ -22,7 +23,14 @@ class Ocupado.Views.EventsListView extends Backbone.Marionette.CompositeView
       'transition': "none"
 
   handleTouchMove: (e) ->
+    e.preventDefault()
     @touchDeltaX = e.originalEvent.changedTouches[0].pageX - @touchStartX
+
+    if Math.abs(@touchDeltaX) > @eventsListEl.outerWidth(true)/3 && @touchDeltaX < 0
+      @eventsListHandle.addClass 'is-open'
+    else
+      @eventsListHandle.removeClass 'is-open'
+
     if Math.abs(@startingPositionX + @touchDeltaX) < @eventsListEl.outerWidth(true)
       @eventsListEl.css
         '-webkit-transform': "translate3d(#{@startingPositionX + @touchDeltaX}px, 0, 0)"

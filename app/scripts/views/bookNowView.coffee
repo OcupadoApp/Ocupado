@@ -19,6 +19,7 @@ class Ocupado.Views.BookNowView extends Backbone.Marionette.ItemView
     @touchStartY = e.originalEvent.targetTouches[0].pageY
 
   handleTouchMove: (e) ->
+    e.preventDefault()
     @touchPosX = e.originalEvent.changedTouches[0].pageX
     @touchPosY = e.originalEvent.changedTouches[0].pageY
 
@@ -27,12 +28,11 @@ class Ocupado.Views.BookNowView extends Backbone.Marionette.ItemView
       arcY = arc.$el.offset().top + arc.arcPosY
       arcX = arc.$el.offset().left + arc.arcPosX
       theta = Math.atan2(@touchPosY - arcY, @touchPosX - arcX)
-      @newY = Math.sin(theta) * arc.maxRadius - 8
+      @newY = Math.sin(theta) * arc.maxRadius
       @newX = Math.cos(theta) * arc.maxRadius
       @updateDurationIndicator(theta)
       @btn.css
-        'webkitTransform': "translate3d(#{@newX}px, #{@newY + arc.arcPosY}px, 0)"
-        'transform': "translate3d(#{@newX}px, #{@newY}, 0)"
+        'transform': "translate3d(#{@newX}px, #{@newY + arc.maxRadius}px, 0)"
 
   updateDurationIndicator: (rads) ->
     degs = @toDegrees(rads)
@@ -48,13 +48,12 @@ class Ocupado.Views.BookNowView extends Backbone.Marionette.ItemView
     degs
 
   handleTouchEnd: (e) ->
-    # unless $.inArray(e.timeStamp, @eventBuffer) || !@newEventDuration?
-    #   Ocupado.roomsView.collection.models[0].bookRoom
-    #     duration: @newEventDuration
-    #     summary: "Room booked by Ocupado"
+    unless $.inArray(e.timeStamp, @eventBuffer) || !@newEventDuration?
+      Ocupado.roomsView.collection.models[0].bookRoom
+        duration: @newEventDuration
+        summary: "Room booked by Ocupado"
 
     @btn.css
-      'webkitTransform': "translate3d(0px, 0px, 0)"
       'transform': "translate3d(0px, 0px, 0)"
     $('.room-status-text').text($('.room-status-text').data('default'))
     @eventBuffer.push e.timeStamp

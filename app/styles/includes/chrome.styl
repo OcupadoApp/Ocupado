@@ -11,33 +11,38 @@
   color #000
   z-index 20
 
-  .events-list-content
-    height 100%
-    width 100%
+.events-list-content
+  height 100%
+  width 100%
 
-  .events-list-handle
+.events-list-handle
+  width 30px
+  height 100%
+  position absolute
+  left -30px
+  top 0
+  margin-top -25px
+
+  &:before
+    content ''
+    font-family entypo
+    color #ffffff
+    display block
+    height 50px
     width 30px
-    height 100%
     position absolute
-    left -30px
-    top 0
+    left 0
+    top 50%
     margin-top -25px
+    transform scale(2,1)
+    -webkit-transform scale(1,2)
+    line-height 50px
+    font-size 40px
+    transition all 0.3s ease
 
-    &:before
-      content ''
-      font-family entypo
-      color #ffffff
-      display block
-      height 50px
-      width 30px
-      position absolute
-      left 0
-      top 50%
-      margin-top -25px
-      transform scale(2,1)
-      -webkit-transform scale(1,2)
-      line-height 50px
-      font-size 40px
+  &.is-open:before
+    transform scale(2,1) rotate(180deg) translateX(10px)
+    -webkit-transform scale(1,2) rotate(180deg) translateX(10px)
 
 .upcoming-events
   margin 0
