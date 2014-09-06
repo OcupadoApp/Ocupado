@@ -8,11 +8,11 @@ window.addEventListener 'load', ->
 window.Ocupado = _.extend (new Backbone.Marionette.Application()),
   env: if _ENV? then _ENV else 'development'
   config:
-    clientId: '130023180090-hm7chbbqpr84hhg42r77jgaivuvuh2ns.apps.googleusercontent.com'
-    clientSecret: 'wyM_IJHbmvPuLitGJ-nb-v6T'
+    clientId: '645111580333-v6ueanllqjpq9t9flu0t5gs3qagbc1pn.apps.googleusercontent.com'
+    clientSecret: 'wpNU7-yyYswRprmXoS6iG7QF'
     redirectUri: 'http://localhost'
-    webClientId: '130023180090-9mes73f8vancio9ocm8dh6l8ji82v1ed.apps.googleusercontent.com'
-    webApiKey: 'AIzaSyDc-dRIAd0rPnZK4MwuExeBG_JBcnWyTRE'
+    webClientId: '645111580333-69jco4h50toqk3l2kjvuah562rml7o37.apps.googleusercontent.com'
+    webApiKey: 'AIzaSyB3lhagMbhDhZnenMJ_sNZ5bdbOS7HD7kQ'
     scope: 'https://www.googleapis.com/auth/calendar'
 
   Models: {}
