@@ -4,6 +4,7 @@ test/temp
 .sass-cache
 app/bower_components
 .tmp
+.tags
 test/bower_components/
 test/spec
 
