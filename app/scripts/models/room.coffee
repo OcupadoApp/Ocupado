@@ -30,7 +30,7 @@ class Ocupado.Models.RoomModel extends Backbone.RelationalModel
     @
 
   fetch: (options) ->
-    maxTime     = (new Date()).addHours(48)
+    maxTime     = (new Date()).addHours(24)
     minTime     = new Date()
     request = gapi.client.calendar.events.list
       calendarId  : @get 'calendarId'

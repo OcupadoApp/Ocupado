@@ -4,13 +4,7 @@ class Ocupado.Collections.CalendarCollection extends Backbone.Collection
   model: Ocupado.Models.CalendarModel
 
   initialize: ->
-    @fetch().then (filtered) =>
-      _.each filtered, (cal) =>
-        @add
-          color: cal.backgroundColor
-          resourceId: cal.id
-          name: cal.summary
-      @setSelectedResources(_.pluck(filtered, 'id')) unless @getSelectedResources().length
+    @fetch()
 
   comparator: (model) ->
     Ocupado.calendars.getSelectedResources().indexOf model.get('resourceId')
@@ -21,7 +15,13 @@ class Ocupado.Collections.CalendarCollection extends Backbone.Collection
     request.execute (calendars) =>
       filtered = _.filter calendars.items, (calendar) ->
         /@(resource)\.calendar\.google\.com$/.test calendar.id
-      dfd.resolve(filtered)
+      _.each filtered, (cal) =>
+        @add
+          color: cal.backgroundColor
+          resourceId: cal.id
+          name: cal.summary
+      @setSelectedResources(_.pluck(filtered, 'id'))
+      dfd.resolve()
     @dfdCalendarsLoaded.promise()
 
   getSelectedResources: ->

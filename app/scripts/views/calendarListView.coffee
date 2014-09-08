@@ -4,3 +4,9 @@ class Ocupado.Views.CalendarListView extends Backbone.Marionette.CompositeView
   itemView: Ocupado.Views.CalendarItemView
   emptyView: Ocupado.Views.CalendarEmptyView
   itemViewContainer: 'ul'
+  events:
+    'click .sign-out': 'onSignoutClick'
+
+  onSignoutClick: (e) ->
+    e.preventDefault()
+    Ocupado.Auth.signOut()

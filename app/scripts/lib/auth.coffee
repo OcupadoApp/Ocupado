@@ -89,6 +89,31 @@ window.Ocupado.Auth =
     authCompleted.resolve()
     Ocupado.trigger 'ocupado:auth:calendarloaded'
 
+  getToken: ->
+    dfd = $.Deferred()
+    now = new Date().getTime()
+
+    if now < localStorage.expires_at - (45 * 60 * 1000)
+      gapi.auth.setToken
+        access_token: localStorage.access_token
+      dfd.resolve
+        access_token: localStorage.access_token
+    else if localStorage.refresh_token
+      $.post 'https://accounts.google.com/o/oauth2/token',
+        refresh_token: localStorage.refresh_token
+        client_id: Ocupado.config.clientId
+        client_secret: Ocupado.config.clientSecret
+        grant_type: 'refresh_token'
+      .done (data) ->
+        Ocupado.Auth.setToken(data)
+        dfd.resolve(data)
+      .fail (response) ->
+        dfd.reject(response.responseJSON)
+    else
+      dfd.reject()
+    $.when(dfd.promise()).then Ocupado.fetch
+    dfd.promise()
+
   handleAuthResult: (authResult) ->
     authBtn = $('#authorizeButton')
     if authResult and not authResult.error
@@ -117,31 +142,16 @@ window.Ocupado.Auth =
     expiresAt = now + parseInt(token.expires_in, 10) * 1000 - 60000
     localStorage.expires_at = expiresAt
 
+  signOut: ->
+    if Ocupado.env == 'production'
+      localStorage.clear()
+      location.reload()
+    else
+      win = window.open "https://accounts.google.com/logout", 'foo', 'width=500,height=300'
+      setTimeout =>
+        win.close()
+        location.reload()
+      , 3000
+
   tokenIsAvailable: ->
     localStorage.access_token?
-
-  getToken: ->
-    dfd = $.Deferred()
-    now = new Date().getTime()
-
-    if now < localStorage.expires_at - (45 * 60 * 1000)
-      gapi.auth.setToken
-        access_token: localStorage.access_token
-      dfd.resolve
-        access_token: localStorage.access_token
-    else if localStorage.refresh_token
-      $.post 'https://accounts.google.com/o/oauth2/token',
-        refresh_token: localStorage.refresh_token
-        client_id: Ocupado.config.clientId
-        client_secret: Ocupado.config.clientSecret
-        grant_type: 'refresh_token'
-      .done (data) ->
-        Ocupado.Auth.setToken(data)
-        dfd.resolve(data)
-      .fail (response) ->
-        dfd.reject(response.responseJSON)
-    else
-      dfd.reject()
-    $.when(dfd.promise()).then Ocupado.fetch
-    dfd.promise()
-

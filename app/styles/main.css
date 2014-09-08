@@ -23,7 +23,7 @@
 .book-now-btn{position:absolute;width:50px;height:50px;left:50%;margin-left:-25px;top:50%;margin-top:-25px;border:1px solid #57616c;border-radius:50%;background:#0d7f7f;}
 .book-now-btn:before{content:'';display:block;width:100%;height:100%;background-image:url("../images/icon-plus.svg");background-size:15px;background-position:center center;background-repeat:no-repeat}
 .events-list{position:absolute;height:80%;width:40%;right:-40%;top:10%;border:3px solid #0d7f7f;border-radius:5px 0 0 5px;box-sizing:border-box;padding:4px;color:#000;z-index:20}
-.events-list-content{height:100%;width:100%}
+.events-list-content{height:100%;width:100%;position:absolute}
 .events-list-handle{width:30px;height:100%;position:absolute;left:-30px;top:0;margin-top:-25px;}
 .events-list-handle:before{content:'';font-family:entypo;color:#fff;display:block;height:50px;width:30px;position:absolute;left:0;top:50%;margin-top:-25px;transform:scale(2,1);-webkit-transform:scale(1,2);line-height:50px;font-size:40px;transition:all .3s ease}
 .events-list-handle.is-open:before{transform:scale(2,1) rotate(180deg) translateX(10px);-webkit-transform:scale(1,2) rotate(180deg) translateX(10px)}
@@ -40,6 +40,7 @@
 .calendar-list{width:500px;margin:0 auto;list-style-type:none;padding:0;}
 .calendar-list li{margin:0;padding:0;height:100px;line-height:100px;border-bottom:1px solid #d7dadd;text-transform:uppercase;font-size:24px;font-weight:300}
 .calendar-list .calendar-list__bullet{float:left;width:25px;height:25px;border-radius:50%;border:3px solid;margin-top:36px;margin-right:10px}
+.sign-out{position:absolute;bottom:0;right:0;background:transparent;border:none;padding:10px;color:#818c98;font-family:Raleway;font-weight:300}
 body{background:#ececec;position:absolute;height:100%;width:100%;margin:0;font-family:'Raleway';font-weight:100;color:#57616c}
 a{color:#57616c}
 h1{font-weight:500;text-transform:uppercase;font-size:68px;text-align:center;margin-top:24px}
