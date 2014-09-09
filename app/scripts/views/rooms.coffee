@@ -14,7 +14,7 @@ class Ocupado.Views.RoomsView extends Backbone.Marionette.CompositeView
     @collection.on 'update', => @render()
 
   onRender: ->
-    $.when(Ocupado.calendars.fetch()).then =>
+    $.when(Ocupado.calendars.dfdCalendarsLoaded).then =>
       if @collection.models.length
         @eventsList = new Ocupado.Views.EventsListView
           collection: @collection.models[0].get('events')
