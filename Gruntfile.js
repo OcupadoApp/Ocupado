@@ -285,7 +285,7 @@ module.exports = function (grunt) {
         }
       },
       ios: {
-        command: 'cordova run ios',
+        command: 'cordova build ios',
         options: {
           stdout: true,
           execOptions: {

@@ -17,6 +17,7 @@ class Ocupado.Views.BookNowView extends Backbone.Marionette.ItemView
     @btnY = @btn.offset().top + (@btn.height()/2)
     @touchStartX = e.originalEvent.targetTouches[0].pageX
     @touchStartY = e.originalEvent.targetTouches[0].pageY
+    @currentEventDuration = '00:00:00'
 
   handleTouchMove: (e) ->
     e.preventDefault()
@@ -30,16 +31,18 @@ class Ocupado.Views.BookNowView extends Backbone.Marionette.ItemView
       theta = Math.atan2(@touchPosY - arcY, @touchPosX - arcX)
       @newY = Math.sin(theta) * arc.maxRadius
       @newX = Math.cos(theta) * arc.maxRadius
-      @updateDurationIndicator(theta)
       @btn.css
         'transform': "translate3d(#{@newX}px, #{@newY + arc.maxRadius}px, 0)"
+      @updateDurationIndicator(theta)
 
   updateDurationIndicator: (rads) ->
     degs = @toDegrees(rads)
     intervalsPassed = Math.ceil((degs / 6) / @interval)
     minutes = intervalsPassed * @interval
-    @newEventDuration = new Date().addMinutes(minutes) - new Date()
-    $('.room-status-text').text toReadableTime(@newEventDuration)
+    @newEventDuration = Math.round(new Date().addMinutes(minutes) - new Date())
+    if @newEventDuration != @currentEventDuration
+      $('.room-status-text').text toReadableTime(@newEventDuration)
+      @currentEventDuration = @newEventDuration
 
   toDegrees: (rads) ->
     degs = (rads * (180/Math.PI)) + 180

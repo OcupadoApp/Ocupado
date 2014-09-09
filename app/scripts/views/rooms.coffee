@@ -14,15 +14,16 @@ class Ocupado.Views.RoomsView extends Backbone.Marionette.CompositeView
     @collection.on 'update', => @render()
 
   onRender: ->
-    $.when(Ocupado.calendars.dfdCalendarsLoaded).then =>
-      if @collection.models.length
-        @eventsList = new Ocupado.Views.EventsListView
-          collection: @collection.models[0].get('events')
-        @eventsList.render()
+    setTimeout =>
+      $.when(Ocupado.calendars.dfdCalendarsLoaded).then =>
+        if @collection.models.length
+          @eventsList = new Ocupado.Views.EventsListView
+            collection: @collection.models[0].get('events')
+          @eventsList.render()
 
-        if @collection.models[0].isVacant()
-          @bookNowView = new Ocupado.Views.BookNowView
-          @bookNowView.render()
+          if @collection.models[0].isVacant()
+            @bookNowView = new Ocupado.Views.BookNowView
+            @bookNowView.render()
 
   navigateToCalendarList: ->
     Ocupado.router.navigate 'calendar_list',
