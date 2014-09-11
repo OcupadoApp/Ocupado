@@ -16,6 +16,17 @@ window.toReadableTime = (t) ->
   else
     "00:00:00"
 
+window.generateDeviceId = ->
+  s4 = ->
+    Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1)
+  "#{s4()}#{s4()}-#{s4()}-#{s4()}-#{s4()}-#{s4()}#{s4()}#{s4()}"
+
+window.deviceId = ->
+  if localStorage['deviceId']?
+    localStorage['deviceId']
+  else
+    localStorage['deviceId'] = window.generateDeviceId()
+
 Date::addHours = (h) ->
   @setHours @getHours() + h
   this
