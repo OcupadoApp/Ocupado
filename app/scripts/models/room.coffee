@@ -23,10 +23,10 @@ class Ocupado.Models.RoomModel extends Backbone.RelationalModel
       @fetch()
       @collection.on 'fetchAll', @fetch, @
 
-    # Refetch every 2 minutes
+    # Refetch every minute
     setInterval =>
       @fetch.call(this)
-    , 2 * 60 * 1000
+    , 60 * 1000
     @
 
   fetch: (options) ->

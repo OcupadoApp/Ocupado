@@ -4,8 +4,6 @@ class Ocupado.Views.RoomView extends Backbone.Marionette.ItemView
   tagName: 'section'
 
   initialize: ->
-    @listenTo @model, 'update', @render
-    @render()
     @roomArcView = new Ocupado.Views.RoomArcView
       parentView: this
       model: @model

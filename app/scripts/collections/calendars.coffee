@@ -2,12 +2,10 @@
 
 class Ocupado.Collections.CalendarCollection extends Backbone.Collection
   model: Ocupado.Models.CalendarModel
+  comparator: 'name'
 
   initialize: ->
     @fetch()
-
-  comparator: (model) ->
-    Ocupado.calendars.getSelectedResources().indexOf model.get('resourceId')
 
   fetch: ->
     @dfdCalendarsLoaded = dfd = $.Deferred()
@@ -20,7 +18,7 @@ class Ocupado.Collections.CalendarCollection extends Backbone.Collection
           color: cal.backgroundColor
           resourceId: cal.id
           name: cal.summary
-      @setSelectedResources(_.pluck(filtered, 'id'))
+      @setSelectedResources(_.pluck(filtered, 'id')) unless @getSelectedResources()
       dfd.resolve()
     @dfdCalendarsLoaded.promise()
 

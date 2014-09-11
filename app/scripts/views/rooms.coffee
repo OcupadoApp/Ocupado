@@ -11,7 +11,6 @@ class Ocupado.Views.RoomsView extends Backbone.Marionette.CompositeView
     Handlebars.registerPartial('occupied', Ocupado.Templates.occupied)
     Handlebars.registerPartial('upcoming', Ocupado.Templates.upcoming)
     Handlebars.registerPartial('vacant', Ocupado.Templates.vacant)
-    @collection.on 'update', => @render()
 
   onRender: ->
     setTimeout =>
