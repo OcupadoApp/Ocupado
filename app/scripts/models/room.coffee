@@ -43,9 +43,8 @@ class Ocupado.Models.RoomModel extends Backbone.RelationalModel
     request.execute @fetchResponse
 
   fetchResponse: (resp) =>
-    @get('events').each (e) =>
-      @get('events').remove(e)
-    @set 'name', resp.summary.replace('Toronto - ','') unless @get('name').length
+    @get('events').each (e) => @get('events').remove(e)
+    @set 'name', resp.summary.replace(/(Toronto|Ottawa) - /,'') unless @get('name').length
 
     if resp.items?.length > 0
       for k, v of resp.items

@@ -43,7 +43,6 @@ class Ocupado.Models.EventModel extends Backbone.RelationalModel
     @intervalRef = setInterval =>
       @timeRemaining = @get('endDate') - Date.now()
     , 50
-    @get('room').trigger('update')
 
   eventUpcoming: ->
     # Fire 'event:start' when the time comes
@@ -58,9 +57,6 @@ class Ocupado.Models.EventModel extends Backbone.RelationalModel
 
   eventEnd: ->
     clearInterval @intervalRef
-    thisRoom = @get('room')
-    @collection.remove(this)
-    thisRoom.trigger('update')
 
   creatorImagePath: ->
     "http://www.gravatar.com/avatar/#{md5(@get('creatorEmail'))}?s=220"
