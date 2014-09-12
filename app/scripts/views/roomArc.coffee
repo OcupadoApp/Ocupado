@@ -38,7 +38,7 @@ class Ocupado.Views.RoomArcView extends Backbone.View
       "stroke-width": 2
       "stroke-dasharray": '. '
       arc: [@arcPosX, @arcPosY, 100, 100, @maxRadius]
-    $(@bgarc.node).attr('stroke-dasharray', "1, 16")
+    $(@bgarc.node).attr('stroke-dasharray', "2, 16")
 
     @arc = @paper.path().attr
       "stroke": ARC_DATA[status].arcColor

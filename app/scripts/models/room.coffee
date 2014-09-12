@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 class Ocupado.Models.RoomModel extends Backbone.RelationalModel
 
@@ -23,10 +23,10 @@ class Ocupado.Models.RoomModel extends Backbone.RelationalModel
       @fetch()
       @collection.on 'fetchAll', @fetch, @
 
-    # Refetch every minute
+    # Refetch every hour
     setInterval =>
       @fetch.call(this)
-    , 60 * 1000
+    , 60 * 60 * 1000
     @
 
   fetch: (options) ->

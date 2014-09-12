@@ -16,4 +16,5 @@ class Ocupado.Routers.AppRouter extends Backbone.Router
         collection: new Ocupado.Collections.RoomsCollection
     Ocupado.mainRegion.show Ocupado.roomsView
     Ocupado.roomsView.delegateEvents()
+    Ocupado.socket = new Ocupado.Models.Socket
 
